@@ -1,0 +1,25 @@
+# Create Private DNS Zone
+resource "azurerm_private_dns_zone" "private_dns_zone" {
+    name = "terraformwithritesh.in"
+    resource_group_name = azurerm_resource_group.rg.name
+  
+}
+
+# Associate Private DNS Zone to Virtual Network
+resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_vnet_associate" {
+    name = "${local.resource_name_prefix}-private-dns-zone-vnet-associate"
+    resource_group_name = azurerm_resource_group.rg.name
+    private_dns_zone_name = azurerm_private_dns_zone.private_dns_zone.name
+    virtual_network_id = azurerm_virtual_network.vnet.id
+  
+}
+# Internal Load Balancer DNS A Record
+resource "azurerm_private_dns_a_record" "app_lb_dns_record" {
+    depends_on = [ azurerm_lb.app_internal_lb ]
+    name = "test"
+    zone_name = azurerm_private_dns_zone.private_dns_zone.name
+    resource_group_name = azurerm_resource_group.rg.name
+    ttl = 300
+    #records = ["10.0.11.241"]
+    records = ["${azurerm_lb.app_internal_lb.frontend_ip_configuration[0].private_ip_address}"]
+}
