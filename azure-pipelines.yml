@@ -10,15 +10,15 @@ pool: Default
   #vmImage: ubuntu-latest
 stages:
   - stage: GetTerraformManifests
-    displayName: Build_Stage
+    displayName: Build Stage
     jobs:
       - job: FetchTerraformManifests
         steps:
           - bash: echo "contents in working directoy"; ls -lrth $(System.DefaultWorkingDirectory)
 
           - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(System.DefaultWorkingDirectory)'
+            inputs:          #/home/ubuntu/myagent/_work/1/s/16-Azure-IAC-DevOps/terraform-manifests
+              SourceFolder: '$(System.DefaultWorkingDirectory)/16-Azure-IAC-DevOps/'
               Contents: '**'
               TargetFolder: '$(System.DefaultWorkingDirectory)'
 
