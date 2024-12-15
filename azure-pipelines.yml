@@ -12,7 +12,7 @@ stages:
   - stage: GetTerraformManifests
     displayName: Build_Stage
     jobs:
-      - job: BuildJob
+      - job: FetchTerraformManifests
         steps:
           - bash: echo "contents in working directoy"; ls -lrth $(System.DefaultWorkingDirectory)
 
