@@ -28,6 +28,6 @@ stages:
           - task: PublishBuildArtifacts@1
             displayName: Publish Manifests to Release pipeline
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-manifests'
               ArtifactName: 'terraform-manifests'
               publishLocation: 'Container'
