@@ -24,10 +24,18 @@ stages:
 
           - bash: echo "contents in working directoy"; ls -lrth $(System.DefaultWorkingDirectory)
             displayName: List Contents post copying
-          
+
+          # Copy Terraform files to the Artifact Staging Directory
+          - task: CopyFiles@2
+            displayName: Copy Terraform Manifests to Staging Directory
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)/terraform-manifests'
+              Contents: '**/*'  # Copy all files and subdirectories
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+              
           - task: PublishBuildArtifacts@1
             displayName: Publish Manifests to Release pipeline
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-manifests'
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'terraform-manifests'
               publishLocation: 'Container'
