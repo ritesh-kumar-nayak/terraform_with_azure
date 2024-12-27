@@ -1,4 +1,4 @@
-environment = "prod"
+environment_dev = "prod"
 
 vnet_address_space = ["10.4.0.0/16"]
 

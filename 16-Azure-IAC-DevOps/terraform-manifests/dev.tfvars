@@ -1,4 +1,4 @@
-environment = "dev"
+environment_dev = "dev"
 vnet_address_space = ["10.1.0.0/16"]
 
 web_subnet_name    = "websubnet"
