@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~>1.5.6" # Minor version upgrades are allowed
+  required_version = ">=1.5.6" # Minor version upgrades are allowed
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
